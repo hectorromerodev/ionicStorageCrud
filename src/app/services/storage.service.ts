@@ -7,6 +7,66 @@ import { Storage } from '@ionic/storage';
 export class StorageService {
 
   constructor(private storage: Storage) { }
+
+  // Create CRUD methods
+
+  // Create
+  addItem(item: ForkliftFormItem): Promise<any> {
+    // Specify a the return of a promess to use then block get the item was added
+    return this.storage.get(FORKLIFT_KEY)
+      .then((formItems: ForkliftFormItem[]) => {
+        // Check if exist push it or return set ;
+        if (formItems) {
+          formItems.push(item);
+          return this.storage.set(FORKLIFT_KEY, [formItems]); // Return array with added form
+        } else {
+          return this.storage.set(FORKLIFT_KEY, [item]); // Return the same array
+        }
+      });
+  }
+
+  // Read
+  getItems(): Promise<ForkliftFormItem> {
+    return this.storage.get(FORKLIFT_KEY); // Get all values
+  }
+  // Update
+  updateItem(item: ForkliftFormItem) {
+    return this.storage.get(FORKLIFT_KEY)
+      .then((formItems: ForkliftFormItem[]) => {
+        // If items does not exist or length is 0 return null
+        if (!formItems || formItems.length === 0) {
+          return null;
+        }
+        let newFormItem: ForkliftFormItem[] = [];
+
+        // Loop througth the array and check if exist the added item
+        for (let form of formItems) {
+          if (form.id === item.id) {
+            newFormItem.push(item); // Push newItem
+          } else {
+            newFormItem.push(form);
+          }
+        }
+        return this.storage.set(FORKLIFT_KEY, newFormItem);
+      });
+  }
+  // Delete
+  deleteItem(id: number): Promise<any> {
+    return this.storage.get(FORKLIFT_KEY)
+      .then((formItems: ForkliftFormItem[]) => {
+        if (!formItems || formItems.length === 0) {
+          return null;
+        }
+        let formsToKeep: ForkliftFormItem[] = [];
+        for (let form of formItems) {
+          if (form.id !== id.toString()) {
+            console.log('To keep: ' + form);
+            formsToKeep.push(form);
+          }
+        }
+        return this.storage.set(FORKLIFT_KEY, formsToKeep);
+      });
+  }
 }
 
 export interface ForkliftFormItem {
@@ -30,3 +90,5 @@ interface IPhoto {
   base64?: string;
   photoId?: string;
 }
+
+const FORKLIFT_KEY = 'forkliftFormItems';
