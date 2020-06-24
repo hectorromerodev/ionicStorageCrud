@@ -1,0 +1,7 @@
+{
+  "name": "ionicStorageCrud",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
