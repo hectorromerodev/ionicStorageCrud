@@ -10,4 +10,4 @@
 
 | col 1      | col 2      |
 |------------|-------------|
-| image 1 | image 2 |
+| <img src="./src/assets/form.png" width="200"> | image 2 |
