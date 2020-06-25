@@ -5,10 +5,10 @@
 5.  Import IonicStorageModule.forRoot() in app.module from @ionic/storage
 
 
-| Init form      | With Data      | Subir       |
+| Init form      | With Data      | Submit       |
 |------------|-------------|-------------|
 | <img src="./src/assets/form.png" width="250"> | <img src="./src/assets/form-with-info.png" width="250"> | <img src="./src/assets/form-submit.png" width="250"> |
 
-| Listado      | Opciones      |
+| List      | Options      |
 |-------------|-------------|
 | <img src="./src/assets/form-list.png" width="250"> | <img src="./src/assets/form-list-sliding.png" width="250"> |
