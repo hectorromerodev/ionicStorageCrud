@@ -30,17 +30,17 @@ export class StorageService {
     return this.storage.get(FORKLIFT_KEY); // Get all values
   }
   // Update
-  updateItem(item: ForkliftFormItem) {
+  updateItem(item: ForkliftFormItem): Promise<any> {
     return this.storage.get(FORKLIFT_KEY)
       .then((formItems: ForkliftFormItem[]) => {
         // If items does not exist or length is 0 return null
         if (!formItems || formItems.length === 0) {
           return null;
         }
-        let newFormItem: ForkliftFormItem[] = [];
+        const newFormItem: ForkliftFormItem[] = [];
 
         // Loop througth the array and check if exist the added item
-        for (let form of formItems) {
+        for (const form of formItems) {
           if (form.id === item.id) {
             newFormItem.push(item); // Push newItem
           } else {
@@ -57,8 +57,8 @@ export class StorageService {
         if (!formItems || formItems.length === 0) {
           return null;
         }
-        let formsToKeep: ForkliftFormItem[] = [];
-        for (let form of formItems) {
+        const formsToKeep: ForkliftFormItem[] = [];
+        for (const form of formItems) {
           if (form.id !== id) {
             formsToKeep.push(form);
           }

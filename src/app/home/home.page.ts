@@ -1,7 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { StorageService, ForkliftFormItem } from '../services/storage.service';
 import { ToastController, Platform, IonList } from '@ionic/angular';
-import { formatNumber } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +21,6 @@ export class HomePage implements OnInit {
     this.platform.ready()
       .then(() => {
         this.loadItems();
-        console.log(this.forms);
       });
   }
   ngOnInit() {
@@ -31,7 +29,6 @@ export class HomePage implements OnInit {
   loadItems() {
     this.storageService.getItems()
       .then(items => {
-        console.log(items);
         this.forms = items;
       });
   }
@@ -40,8 +37,8 @@ export class HomePage implements OnInit {
     this.newItem.createdAt = Date.now();
     this.newItem.id = Date.now();
     this.storageService.addItem(this.newItem)
-      .then(item => {
-        this.newItem = {} as ForkliftFormItem;
+      .then(() => {
+        this.newItem = ({} as ForkliftFormItem);
         this.showToast('Formulario agregado!');
         this.loadItems(); // Or we can add to the array directly
       });
@@ -52,16 +49,16 @@ export class HomePage implements OnInit {
     form.createdAt = Date.now();
 
     this.storageService.updateItem(form)
-      .then(item => {
+      .then(() => {
         this.showToast('Formulario actualizado!');
         this.mylist.closeSlidingItems(); // Fix or sliding is stuck afterwards
         this.loadItems(); // Or splice it from the array directrly
-      })
+      });
   }
   // DELETE
   deleteForm(form: ForkliftFormItem) {
     this.storageService.deleteItem(form.id)
-      .then(item => {
+      .then(() => {
         this.showToast('Formulario removido!');
         this.mylist.closeSlidingItems(); // Fix or sliding is stuck afterwards
         this.loadItems(); // Or splice it from the array directrly
