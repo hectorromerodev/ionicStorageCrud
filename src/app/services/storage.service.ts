@@ -18,7 +18,7 @@ export class StorageService {
         // Check if exist push it or return set ;
         if (formItems) {
           formItems.push(item);
-          return this.storage.set(FORKLIFT_KEY, [formItems]); // Return array with added form
+          return this.storage.set(FORKLIFT_KEY, formItems); // Return array with added form
         } else {
           return this.storage.set(FORKLIFT_KEY, [item]); // Return the same array
         }
@@ -26,7 +26,7 @@ export class StorageService {
   }
 
   // Read
-  getItems(): Promise<ForkliftFormItem> {
+  getItems(): Promise<ForkliftFormItem[]> {
     return this.storage.get(FORKLIFT_KEY); // Get all values
   }
   // Update
@@ -59,8 +59,7 @@ export class StorageService {
         }
         let formsToKeep: ForkliftFormItem[] = [];
         for (let form of formItems) {
-          if (form.id !== id.toString()) {
-            console.log('To keep: ' + form);
+          if (form.id !== id) {
             formsToKeep.push(form);
           }
         }
@@ -70,7 +69,7 @@ export class StorageService {
 }
 
 export interface ForkliftFormItem {
-  id: string;
+  id: number;
   noEconomico: string;
   marca: string;
   modelo: string;
@@ -79,7 +78,7 @@ export interface ForkliftFormItem {
   largo_pico: string;
   notas: string;
   id_estado: string;
-  createdAt: string;
+  createdAt: number;
   creator: string;
   photos: IPhoto[];
 }
