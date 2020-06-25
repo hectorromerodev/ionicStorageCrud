@@ -7,7 +7,7 @@
 
 | Init form      |
 |------------|
-| <img src="./src/assets/form.png" width="165"> |
+| <img src="./src/assets/form.png" width="250"> |
 
 | With Data      | Subir formulario      |
 |-------------|-------------|
