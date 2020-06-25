@@ -4,3 +4,6 @@
 4.  ionic cordova plugin add cordova-sqlite-storage
 5.  Import IonicStorageModule.forRoot() in app.module from @ionic/storage
 6.  
+
+
+![](src/assets/form.png)
