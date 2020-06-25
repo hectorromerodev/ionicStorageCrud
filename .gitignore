@@ -59,6 +59,7 @@ package-lock.json
 .gradle
 .idea
 *.exe
+www/
 
 # res
 **/resources/signing
